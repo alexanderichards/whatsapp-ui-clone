@@ -6,6 +6,9 @@ import doubleCheck from './assets/done_all.svg'
 
 import micIcon from './assets/mic.svg'
 
+import { mainUser } from './generateFakeData'
+import Avatar from './components/Avatar'
+
 import './App.css'
 
 function App() {
@@ -13,13 +16,7 @@ function App() {
         <div className="app">
             <aside>
                 <header>
-                    <div className="avatar-component">
-                        <img
-                            className="avatar"
-                            src="https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg"
-                            alt=""
-                        />
-                    </div>
+                    <Avatar user={mainUser}></Avatar>
                 </header>
                 <div className="search">
                     <input type="text" placeholder="Search or start a new chat" />
@@ -49,15 +46,7 @@ function App() {
             </aside>
             <main>
                 <header>
-                    <div className="avatar-component">
-                        <img
-                            className="avatar"
-                            src="https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg"
-                            alt=""
-                        />
-
-                        <h3 className="avatar-title">Sofia</h3>
-                    </div>
+                    <Avatar user={mainUser} showName></Avatar>
                 </header>
                 <div className="chats">
                     <div className="message received">
