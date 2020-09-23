@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import emojiIcon from './assets/tag_faces.svg'
 
-import doubleCheck from './assets/done_all.svg'
-
 import micIcon from './assets/mic.svg'
 
-import { mainUser } from './generateFakeData'
+import doubleCheck from './assets/done_all.svg'
+
+
+import { mainUser, contactsMessages } from './generateFakeData'
+
 import Avatar from './components/Avatar'
+
+import ContactBox from './components/ContactBox'
 
 import './App.css'
 
 function App() {
+
+    const [data, setData] = useState(contactsMessages)
+    const [contactSelected, setContactSelected] = useState({})
     return (
         <div className="app">
             <aside>
@@ -22,31 +29,14 @@ function App() {
                     <input type="text" placeholder="Search or start a new chat" />
                 </div>
                 <div className="contact-boxes">
-                    <div className="contact-box">
-                        <div className="avatar-component">
-                            <img
-                                className="avatar"
-                                src="https://pbs.twimg.com/profile_images/501759258665299968/3799Ffxy.jpeg"
-                                alt=""
-                            />
-                        </div>
-
-                        <div className="right-section">
-                            <div className="contact-box-header">
-                                <h3 className="avatar-title">Jessica</h3>
-                                <span className="time-mark">yesterday</span>
-                            </div>
-                            <div className="last-msg">
-                                <img src={doubleCheck} alt="" className="icon-small" />
-                                <span className="text">Lorem ipsum dolor</span>
-                            </div>
-                        </div>
-                    </div>
+                    {data.map(({contact}) => (
+                    <ContactBox contact={contact} key={contact.id} setContactSelected={setContactSelected}/>
+                    ))}
                 </div>
             </aside>
             <main>
                 <header>
-                    <Avatar user={mainUser} showName></Avatar>
+                    <Avatar user={contactSelected} showName></Avatar>
                 </header>
                 <div className="chats">
                     <div className="message received">
