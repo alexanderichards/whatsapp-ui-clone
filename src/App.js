@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import emojiIcon from './assets/tag_faces.svg'
 
 import micIcon from './assets/mic.svg'
-
-import doubleCheck from './assets/done_all.svg'
-
 
 import { mainUser, contactsMessages } from './generateFakeData'
 
@@ -13,12 +10,20 @@ import Avatar from './components/Avatar'
 
 import ContactBox from './components/ContactBox'
 
+import MessageBox from './components/MessagesBox'
+
 import './App.css'
 
 function App() {
 
     const [data, setData] = useState(contactsMessages)
     const [contactSelected, setContactSelected] = useState({})
+    const [currentMessages, setCurrentMessages] = useState([])
+
+    useEffect(() => {
+        const currentContact = data.find((data) => data.contact.id === contactSelected.id)
+        setCurrentMessages((currentContact && currentContact.messages) || [])
+    }, [contactSelected, data])
     return (
         <div className="app">
             <aside>
@@ -38,21 +43,7 @@ function App() {
                 <header>
                     <Avatar user={contactSelected} showName></Avatar>
                 </header>
-                <div className="chats">
-                    <div className="message received">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur voluptatibus fuga illo.
-                        <div className="metadata">
-                            <span className="date">05/20/2020</span>
-                        </div>
-                    </div>
-                    <div className="message sent">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing.
-                        <div className="metadata">
-                            <span className="date">05/20/2020</span>
-                            <img src={doubleCheck} alt="" className="icon-small" />
-                        </div>
-                    </div>
-                </div>
+                <MessageBox messages={currentMessages}></MessageBox>
                 <div className="chat-input-box">
                     <div className="icon emoji-selector">
                         <img src={emojiIcon} alt="" />
