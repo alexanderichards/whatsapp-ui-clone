@@ -4,7 +4,7 @@ import micIcon from '../assets/mic.svg'
 import sendIcon from '../assets/send.svg'
 
 
-function ChatInputBox({message, setMessage}) {
+function ChatInputBox({message, setMessage, pushMessage}) {
     return (
         <div className="chat-input-box">
             <div className="icon emoji-selector">
@@ -15,7 +15,7 @@ function ChatInputBox({message, setMessage}) {
                 <input type="text" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)}/>
             </div>
 
-            <div className="icon send">
+            <div className="icon send" onClick={pushMessage}>
                 <img src={message ? sendIcon : micIcon} alt="" />
             </div>
         </div>
