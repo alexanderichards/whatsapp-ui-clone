@@ -9,7 +9,9 @@ function MessagesBox({messages}) {
     })
     return (
         <div className="chats">
-            {messages.map((message) => (
+            {messages
+                .sort((a, b) => a.date.getTime() - b.date.getTime())
+                .map((message) => (
                 <Message message={message} key={message.id}></Message>
             ))};
             <div style={{float: "right", clear: 'both'}} ref={endDiv}></div>
