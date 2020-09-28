@@ -7,7 +7,7 @@ import sendIcon from '../assets/send.svg'
 function ChatInputBox({message, setMessage, pushMessage}) {
 
     function handleKeyDown(e){
-        if(e.key == "Enter" && message){
+        if(e.key === "Enter" && message){
             pushMessage()
         }
     }
